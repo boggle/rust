@@ -152,7 +152,7 @@ fn recv_<T: send>(p: *rust_port) -> T {
     ret res;
 }
 
-#[doc = "Receive on one of two ports"]
+#[doc = "Receive on one of two ports which both have differing type"]
 fn select2<A: send, B: send>(p_a: port<A>, p_b: port<B>)
     -> either<A, B> unsafe {
     let ports = [***p_a, ***p_b];
@@ -187,9 +187,50 @@ fn select2<A: send, B: send>(p_a: port<A>, p_b: port<B>)
     }
 }
 
+#[doc = "Receive from one of a vector of ports of the same type"]
+fn selectn<A: send>(p: [port<A>]) -> option<A> unsafe {
+    let ports   = p.map({|port| ***port});
+    let n_ports = ports.len() as libc::size_t;
+    let yield = 0u, yieldp = ptr::addr_of(yield);
+
+    let mut resport: *rust_port;
+    resport = rusti::init::<*rust_port>();
+    vec::as_buf(ports) {|ports|
+        rustrt::rust_port_select(ptr::addr_of(resport), ports, n_ports,
+                                 yieldp);
+    }
+
+    if yield != 0u {
+        task::yield();
+    } else {
+        task::yield();
+    }
+
+    assert resport != ptr::null();
+    // FIXME replace with something more efficient
+    ret ports.position_elem(resport).map({|i| recv(p[i])});
+}
+
 #[doc = "Returns true if there are messages available"]
 fn peek<T: send>(p: port<T>) -> bool {
     rustrt::rust_port_size(***p) != 0u as libc::size_t
+}
+
+
+#[doc = "
+Return index of the first port from `p` that is ready to receive, or none
+if there is none.
+
+Ports are scanned in sequential order, starting from position `from` modulo the length of `p` (Pass index of last port found ready in `p` + 1 for fairness)
+"]
+fn peekn<T: send>(p: [port<T>], from: uint) -> option<uint> {
+    let test  = bind peek(_);
+    let len   = p.len();
+    let start = from % len; /* eases usage as caller doesnt have to */
+    ret alt vec::position_between(p, start, len, test) {
+      none { vec::position_between(p, 0u, start, test) }
+      res { res }
+    }
 }
 
 #[doc = "
