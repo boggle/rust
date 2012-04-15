@@ -5,12 +5,12 @@ const infinity: t = 1.0_f32/0.0_f32;
 const neg_infinity: t = -1.0_f32/0.0_f32;
 
 mod consts {
-    
-	// FIXME this is wrong! replace with hexadecimal (%a) constants below
-	// (see Issue #1433)
-	const min_value: t = 1.175494e-38_f32;
-	const max_value: t = 3.402823e+38_f32;
-	const epsilon: t = 0.000000_f32;
+
+    // FIXME this is wrong! replace with hexadecimal (%a) constants below
+    // (see Issue #1433)
+    const min_value: t = 1.175494e-38_f32;
+    const max_value: t = 3.402823e+38_f32;
+    const epsilon: t = 0.000000_f32;
 
     #[doc = "Archimedes' constant"]
     const pi: t = 3.14159265358979323846264338327950288_f32;

@@ -39,6 +39,8 @@ install-target-$(1)-host-$(2): $$(SREQ$$(ISTAGE)_T_$(1)_H_$(2))
 	$$(Q)$$(call INSTALL_LIB, \
 		$$(TL$(1)$(2)),$$(PTL$(1)$(2)),$$(CORELIB_GLOB))
 	$$(Q)$$(call INSTALL_LIB, \
+		$$(TL$(1)$(2)),$$(PTL$(1)$(2)),$$(MATHLIB_GLOB))
+	$$(Q)$$(call INSTALL_LIB, \
 		$$(TL$(1)$(2)),$$(PTL$(1)$(2)),$$(STDLIB_GLOB))
 	$$(Q)$$(call INSTALL_LIB, \
 		$$(TL$(1)$(2)),$$(PTL$(1)$(2)),$$(LIBRUSTC_GLOB))
@@ -75,6 +77,7 @@ install-host: $(SREQ$(ISTAGE)_T_$(CFG_HOST_TRIPLE)_H_$(CFG_HOST_TRIPLE))
 	$(Q)$(call INSTALL,$(HB3),$(PHB),rustdoc$(X))
 	$(Q)$(call INSTALL,$(HL),$(PHL),$(CFG_RUNTIME))
 	$(Q)$(call INSTALL_LIB,$(HL),$(PHL),$(CORELIB_GLOB))
+	$(Q)$(call INSTALL_LIB,$(HL),$(PHL),$(MATHLIB_GLOB))
 	$(Q)$(call INSTALL_LIB,$(HL),$(PHL),$(STDLIB_GLOB))
 	$(Q)$(call INSTALL_LIB,$(HL),$(PHL),$(LIBRUSTC_GLOB))
 	$(Q)$(call INSTALL_LIB,$(HL),$(PHL),$(LIBRUSTSYNTAX_GLOB))
@@ -96,6 +99,7 @@ uninstall:
 	$(Q)rm -f $(PHL)/$(CFG_RUNTIME)
 	$(Q)for i in \
           $(call HOST_LIB_FROM_HL_GLOB,$(CORELIB_GLOB)) \
+          $(call HOST_LIB_FROM_HL_GLOB,$(MATHLIB_GLOB)) \
           $(call HOST_LIB_FROM_HL_GLOB,$(STDLIB_GLOB)) \
           $(call HOST_LIB_FROM_HL_GLOB,$(LIBRUSTC_GLOB)) \
           $(call HOST_LIB_FROM_HL_GLOB,$(LIBRUSTSYNTAX_GLOB)) \

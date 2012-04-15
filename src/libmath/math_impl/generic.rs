@@ -117,7 +117,8 @@ pure fn log2(n: t) -> t {
  */
 
 #[doc = "
-Compute the exponentiation of an integer by another integer as a floating point value
+Compute the exponentiation of an integer by another integer as a floating
+point value
 
 # Arguments
 
@@ -151,22 +152,37 @@ pure fn pow_with_uint(base: uint, pow: uint) -> t {
 }
 
 // TODO make this work with regions, cf c_(double,float)
-#[inline] fn frexp(n: t, value: *mut int) -> t { 
+#[inline] fn frexp(n: t, value: *mut int) -> t {
   ret cmath::lib_wrapped::frexp(n, value as *mut c_int);
 }
 
-#[inline] pure fn ldexp(x: t, n: int) -> t { ret cmath::lib_wrapped::ldexp(x, n as c_int); }
+#[inline] pure fn ldexp(x: t, n: int) -> t {
+  ret cmath::lib_wrapped::ldexp(x, n as c_int);
+}
 
 // TODO make this work with regions, cf c_(double,float)
-#[inline] fn lgamma(n: t, value: *mut int) -> t { 
+#[inline] fn lgamma(n: t, value: *mut int) -> t {
   ret cmath::lib_wrapped::lgamma(n, value as *mut c_int);
 }
 
-#[inline] pure fn ldexp_radix(x: t, i: int) -> t { ret cmath::lib_wrapped::ldexp_radix(x, i as c_int); }
+#[inline] pure fn ldexp_radix(x: t, i: int) -> t {
+  ret cmath::lib_wrapped::ldexp_radix(x, i as c_int);
+}
 
-#[inline] pure fn j0(n: t) -> t { ret c_bessel::lib::j0(n as c_bessel::t) as t; }
-#[inline] pure fn j1(n: t) -> t { ret c_bessel::lib::j1(n as c_bessel::t) as t; }
-#[inline] pure fn jn(i: int, n: t) -> t { ret c_bessel::lib::jn(i as c_int, n as c_bessel::t) as t; }
-#[inline] pure fn y0(n: t) -> t { ret c_bessel::lib::y0(n as c_bessel::t) as t; }
-#[inline] pure fn y1(n: t) -> t { ret c_bessel::lib::y1(n as c_bessel::t) as t; }
-#[inline] pure fn yn(i: int, n: t) -> t { ret c_bessel::lib::yn(i as c_int, n as c_bessel::t) as t; }
+#[inline] pure fn j0(n: t) -> t
+  { ret c_bessel::lib::j0(n as c_bessel::t) as t; }
+
+#[inline] pure fn j1(n: t) -> t
+  { ret c_bessel::lib::j1(n as c_bessel::t) as t; }
+
+#[inline] pure fn jn(i: int, n: t) -> t
+  { ret c_bessel::lib::jn(i as c_int, n as c_bessel::t) as t; }
+
+#[inline] pure fn y0(n: t) -> t
+  { ret c_bessel::lib::y0(n as c_bessel::t) as t; }
+
+#[inline] pure fn y1(n: t) -> t
+  { ret c_bessel::lib::y1(n as c_bessel::t) as t; }
+
+#[inline] pure fn yn(i: int, n: t) -> t
+  { ret c_bessel::lib::yn(i as c_int, n as c_bessel::t) as t; }

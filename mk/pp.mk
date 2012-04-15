@@ -3,6 +3,7 @@ ifdef PPFILES
   PP_INPUTS_FILTERED := $(wildcard $(PPFILES))
 else
   PP_INPUTS = $(wildcard $(addprefix $(S)src/libcore/,*.rs */*.rs)) \
+              $(wildcard $(addprefix $(S)src/libmath/,*.rs */*.rs)) \
               $(wildcard $(addprefix $(S)src/libstd/,*.rs */*.rs)) \
               $(wildcard $(addprefix $(S)src/rustc/,*.rs */*.rs */*/*.rs)) \
               $(wildcard $(S)src/test/*/*.rs    \

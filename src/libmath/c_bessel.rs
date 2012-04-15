@@ -1,7 +1,7 @@
 import libc::c_int;
 import libc::c_double;
 
-// Bessel functions are only guaranteed to exist for c_double, 
+// Bessel functions are only guaranteed to exist for c_double,
 // i.e. rust fp code needs to cast (with potential loss of precision)
 type t = c_double;
 

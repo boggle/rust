@@ -115,10 +115,12 @@ CFG_RUNTIME :=$(call CFG_LIB_NAME,rustrt)
 CFG_RUSTLLVM :=$(call CFG_LIB_NAME,rustllvm)
 CFG_CORELIB :=$(call CFG_LIB_NAME,core)
 CFG_STDLIB :=$(call CFG_LIB_NAME,std)
+CFG_MATHLIB :=$(call CFG_LIB_NAME,math)
 CFG_LIBRUSTC :=$(call CFG_LIB_NAME,rustc)
 CFG_LIBRUSTSYNTAX :=$(call CFG_LIB_NAME,rustsyntax)
 
 STDLIB_GLOB :=$(call CFG_LIB_GLOB,std)
+MATHLIB_GLOB :=$(call CFG_LIB_GLOB,math)
 CORELIB_GLOB :=$(call CFG_LIB_GLOB,core)
 LIBRUSTC_GLOB :=$(call CFG_LIB_GLOB,rustc)
 LIBRUSTSYNTAX_GLOB :=$(call CFG_LIB_GLOB,rustsyntax)
@@ -185,6 +187,14 @@ GENERATED :=
 CORELIB_CRATE := $(S)src/libcore/core.rc
 CORELIB_INPUTS := $(wildcard $(addprefix $(S)src/libcore/,        \
                                            core.rc *.rs */*.rs))
+
+######################################################################
+# Math library variables
+######################################################################
+
+MATHLIB_CRATE := $(S)src/libmath/math.rc
+MATHLIB_INPUTS := $(wildcard $(addprefix $(S)src/libmath/,          \
+                                          std.rc *.rs */*.rs))
 
 ######################################################################
 # Standard library variables
@@ -290,6 +300,11 @@ ifdef CFG_DISABLE_SHAREDSTD
   TCORELIB_DEFAULT$(1)_T_$(2)_H_$(3) = \
     $$(TLIB$(1)_T_$(2)_H_$(3))/libcore.rlib
 
+  HMATHLIB_DEFAULT$(1)_H_$(3) = \
+    $$(HLIB$(1)_H_$(3))/libmath.rlib
+  TMATHLIB_DEFAULT$(1)_T_$(2)_H_$(3) = \
+    $$(TLIB$(1)_T_$(2)_H_$(3))/libmath.lib
+
   HSTDLIB_DEFAULT$(1)_H_$(3) = \
     $$(HLIB$(1)_H_$(3))/libstd.rlib
   TSTDLIB_DEFAULT$(1)_T_$(2)_H_$(3) = \
@@ -304,6 +319,11 @@ else
     $$(HLIB$(1)_H_$(3))/$(CFG_CORELIB)
   TCORELIB_DEFAULT$(1)_T_$(2)_H_$(3) = \
     $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_CORELIB)
+
+  HMATHLIB_DEFAULT$(1)_H_$(3) = \
+    $$(HLIB$(1)_H_$(3))/$(CFG_MATHLIB)
+  TMATHLIB_DEFAULT$(1)_T_$(2)_H_$(3) = \
+    $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_MATHLIB)
 
   HSTDLIB_DEFAULT$(1)_H_$(3) = \
     $$(HLIB$(1)_H_$(3))/$(CFG_STDLIB)
@@ -322,6 +342,7 @@ HSREQ$(1)_H_$(3) = \
 	$$(HLIB$(1)_H_$(3))/$$(CFG_RUNTIME) \
 	$$(HLIB$(1)_H_$(3))/$$(CFG_RUSTLLVM) \
 	$$(HCORELIB_DEFAULT$(1)_H_$(3)) \
+  $$(HMATHLIB_DEFAULT$(1)_H_$(3)) \
 	$$(HSTDLIB_DEFAULT$(1)_H_$(3)) \
 	$$(HLIBRUSTC_DEFAULT$(1)_H_$(3)) \
 	$$(MKFILE_DEPS)
@@ -336,6 +357,7 @@ TSREQ$(1)_T_$(2)_H_$(3) = \
 SREQ$(1)_T_$(2)_H_$(3) = \
 	$$(TSREQ$(1)_T_$(2)_H_$(3)) \
 	$$(TLIB$(1)_T_$(2)_H_$(3))/$$(CFG_CORELIB) \
+  $$(TLIB$(1)_T_$(2)_H_$(3))/$$(CFG_MATHLIB)  \
 	$$(TLIB$(1)_T_$(2)_H_$(3))/$$(CFG_STDLIB)  \
 	$$(TLIB$(1)_T_$(2)_H_$(3))/$$(CFG_LIBRUSTC)
 

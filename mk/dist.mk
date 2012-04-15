@@ -29,6 +29,7 @@ PKG_FILES := \
       fuzzer                                   \
       libcore                                  \
       librustsyntax                            \
+      libmath                                  \
       libstd                                   \
       rt                                       \
       rustdoc                                  \

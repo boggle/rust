@@ -58,16 +58,18 @@ clean$(1)_H_$(2):
 	$(Q)rm -f $$(HBIN$(1)_H_$(2))/rustdoc$(X)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_RUNTIME)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_CORELIB)
+	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_MATHLIB)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_STDLIB)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_LIBRUSTC)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_LIBRUSTSYNTAX)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CORELIB_GLOB)
+	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(MATHLIB_GLOB)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(STDLIB_GLOB)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(LIBRUSTC_GLOB)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(LIBRUSTSYNTAX_GLOB)
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(CFG_RUSTLLVM)
+	$(Q)rm -f $$(HLIB$(1)_H_$(2))/libmath.rlib
 	$(Q)rm -f $$(HLIB$(1)_H_$(2))/libstd.rlib
-
 endef
 
 $(foreach host, $(CFG_TARGET_TRIPLES), \
@@ -84,14 +86,17 @@ clean$(1)_T_$(2)_H_$(3):
 	$(Q)rm -f $$(TBIN$(1)_T_$(2)_H_$(3))/rustdoc$(X)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_RUNTIME)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_CORELIB)
+	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_MATHLIB)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_STDLIB)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_LIBRUSTC)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_LIBRUSTSYNTAX)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CORELIB_GLOB)
+	$(Q)rm -f $$(HLIB$(1)_H_$(2))/$(MATHLIB_GLOB)	
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(STDLIB_GLOB)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(LIBRUSTC_GLOB)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(LIBRUSTSYNTAX_GLOB)
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/$(CFG_RUSTLLVM)
+	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/libmath.rlib
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/libstd.rlib
 	$(Q)rm -f $$(TLIB$(1)_T_$(2)_H_$(3))/libmorestack.a
 endef

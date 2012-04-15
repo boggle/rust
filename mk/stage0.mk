@@ -19,6 +19,10 @@ $(HLIB0_H_$(CFG_HOST_TRIPLE))/$(CFG_CORELIB): \
 		$(HBIN0_H_$(CFG_HOST_TRIPLE))/rustc$(X)
 	$(Q)touch $@
 
+$(HLIB0_H_$(CFG_HOST_TRIPLE))/$(CFG_MATHLIB): \
+		$(HBIN0_H_$(CFG_HOST_TRIPLE))/rustc$(X)
+	$(Q)touch $@
+
 $(HLIB0_H_$(CFG_HOST_TRIPLE))/$(CFG_STDLIB): \
 		$(HBIN0_H_$(CFG_HOST_TRIPLE))/rustc$(X)
 	$(Q)touch $@
@@ -52,6 +56,11 @@ $$(HLIB0_H_$(1))/$(CFG_CORELIB): \
 		$$(TLIB$(2)_T_$(1)_H_$(3))/$$(CFG_CORELIB)
 	@$$(call E, cp: $$@)
 	$$(Q)cp $$(TLIB$(2)_T_$(1)_H_$(3))/$$(CORELIB_GLOB) $$@
+
+$$(HLIB0_H_$(1))/$(CFG_MATHLIB): \
+		$$(TLIB$(2)_T_$(1)_H_$(3))/$$(CFG_MATHLIB)
+	@$$(call E, cp: $$@)
+	$$(Q)cp $$(TLIB$(2)_T_$(1)_H_$(3))/$$(MATHLIB_GLOB) $$@
 
 $$(HLIB0_H_$(1))/$(CFG_STDLIB): \
 		$$(TLIB$(2)_T_$(1)_H_$(3))/$$(CFG_STDLIB)

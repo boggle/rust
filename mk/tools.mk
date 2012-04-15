@@ -43,6 +43,7 @@ $$(TBIN$(1)_T_$(4)_H_$(3))/compiletest$$(X):			\
 		$$(COMPILETEST_CRATE) $$(COMPILETEST_INPUTS)	\
 		$$(TSREQ$(1)_T_$(4)_H_$(3))						\
 		$$(TLIB$(1)_T_$(4)_H_$(3))/$$(CFG_CORELIB)      \
+		$$(TLIB$(1)_T_$(4)_H_$(3))/$$(CFG_MATHLIB)      \
 		$$(TLIB$(1)_T_$(4)_H_$(3))/$$(CFG_STDLIB)
 	@$$(call E, compile_and_link: $$@)
 	$$(STAGE$(1)_T_$(4)_H_$(3)) -o $$@ $$<

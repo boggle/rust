@@ -67,5 +67,5 @@ mod consts {
     const ln_10: c_double = 0x1.26bb1bbb55516p+1_f64;
     const sqrt2: c_double = 0x1.6a09e667f3bcdp+0_f64;
     const div_1_sqrt2: c_double = 0x1.6a09e667f3bcdp-1_f64;
-*/	
+*/
 }

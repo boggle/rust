@@ -169,6 +169,7 @@ define TEST_STAGEN
 check-stage$(1)-T-$(2)-H-$(3): tidy				\
 	check-stage$(1)-T-$(2)-H-$(3)-rustc			\
 	check-stage$(1)-T-$(2)-H-$(3)-core          \
+	check-stage$(1)-T-$(2)-H-$(3)-math          \
 	check-stage$(1)-T-$(2)-H-$(3)-std			\
 	check-stage$(1)-T-$(2)-H-$(3)-rpass			\
 	check-stage$(1)-T-$(2)-H-$(3)-rfail			\
@@ -181,6 +182,9 @@ check-stage$(1)-T-$(2)-H-$(3): tidy				\
 
 check-stage$(1)-T-$(2)-H-$(3)-core:				\
 	check-stage$(1)-T-$(2)-H-$(3)-core-dummy
+
+check-stage$(1)-T-$(2)-H-$(3)-math:				\
+	check-stage$(1)-T-$(2)-H-$(3)-math-dummy
 
 check-stage$(1)-T-$(2)-H-$(3)-std:				\
 	check-stage$(1)-T-$(2)-H-$(3)-std-dummy
@@ -243,6 +247,20 @@ check-stage$(1)-T-$(2)-H-$(3)-core-dummy:			\
 	@$$(call E, run: $$<)
 	$$(Q)$$(call CFG_RUN_TEST,$$<,$(2),$(3)) $$(TESTARGS)	\
 	--logfile tmp/check-stage$(1)-T-$(2)-H-$(3)-core.log
+
+# Rules for the math library test runner
+
+$(3)/test/mathtest.stage$(1)-$(2)$$(X):			\
+		$$(MATHLIB_CRATE) $$(MATHLIB_INPUTS)	\
+        $$(SREQ$(1)_T_$(2)_H_$(3))
+	@$$(call E, compile_and_link: $$@)
+	$$(STAGE$(1)_T_$(2)_H_$(3)) -o $$@ $$< --test
+
+check-stage$(1)-T-$(2)-H-$(3)-math-dummy:			\
+		$(3)/test/mathtest.stage$(1)-$(2)$$(X)
+	@$$(call E, run: $$<)
+	$$(Q)$$(call CFG_RUN_TEST,$$<,$(2),$(3)) $$(TESTARGS)	\
+	--logfile tmp/check-stage$(1)-T-$(2)-H-$(3)-math.log
 
 # Rules for the standard library test runner
 
@@ -518,6 +536,7 @@ $(3)/test/$$(FT_DRIVER)-$(2).out: \
 
 check-fast-T-$(2)-H-$(3): tidy			\
 	check-stage2-T-$(2)-H-$(3)-rustc	\
+	check-stage2-T-$(2)-H-$(3)-math		\
 	check-stage2-T-$(2)-H-$(3)-std		\
 	$(3)/test/$$(FT_DRIVER)-$(2).out
 
@@ -545,6 +564,9 @@ check-stage$(1)-H-$(2)-rustc:					\
 check-stage$(1)-H-$(2)-core:					\
 	$$(foreach target,$$(CFG_TARGET_TRIPLES),	\
 	 check-stage$(1)-T-$$(target)-H-$(2)-core)
+check-stage$(1)-H-$(2)-math:					\
+	$$(foreach target,$$(CFG_TARGET_TRIPLES),	\
+	 check-stage$(1)-T-$$(target)-H-$(2)-math)
 check-stage$(1)-H-$(2)-std:					\
 	$$(foreach target,$$(CFG_TARGET_TRIPLES),	\
 	 check-stage$(1)-T-$$(target)-H-$(2)-std)
@@ -614,6 +636,9 @@ check-stage$(1)-H-all-rustc: \
 check-stage$(1)-H-all-core: \
 	$$(foreach target,$$(CFG_TARGET_TRIPLES),	\
 	 check-stage$(1)-H-$$(target)-core)
+check-stage$(1)-H-all-math: \
+	$$(foreach target,$$(CFG_TARGET_TRIPLES),	\
+	 check-stage$(1)-H-$$(target)-math)
 check-stage$(1)-H-all-std: \
 	$$(foreach target,$$(CFG_TARGET_TRIPLES),	\
 	 check-stage$(1)-H-$$(target)-std)
@@ -665,6 +690,7 @@ check-stage$(1): check-stage$(1)-H-$$(CFG_HOST_TRIPLE)
 check-stage$(1)-perf: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-perf
 check-stage$(1)-rustc: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-rustc
 check-stage$(1)-core: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-core
+check-stage$(1)-math: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-math
 check-stage$(1)-std: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-std
 check-stage$(1)-rpass: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-rpass
 check-stage$(1)-rfail: check-stage$(1)-H-$$(CFG_HOST_TRIPLE)-rfail

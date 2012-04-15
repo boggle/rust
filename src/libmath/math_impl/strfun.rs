@@ -16,7 +16,11 @@ fn to_str_common(num: t, digits: uint, exact: bool) -> str {
     if is_NaN(num) { ret "NaN"; }
     if num == infinity { ret "inf"; }
     if num == neg_infinity { ret "-inf"; }
-    let mut (num, accum) = if num < consts::zero { (-num, "-") } else { (num, "") };
+    let mut (num, accum) = if num < consts::zero {
+      (-num, "-")
+    } else {
+      (num, "")
+    };
     let trunc = num as uint;
     let mut frac = num - (trunc as t);
     accum += uint::str(trunc);

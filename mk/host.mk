@@ -67,6 +67,16 @@ $$(HLIB$(2)_H_$(4))/$$(CFG_CORELIB): \
 		$$(wildcard $$(TLIB$(1)_T_$(4)_H_$(3))/$(CORELIB_DSYM_GLOB)) \
 	        $$(HLIB$(2)_H_$(4))
 
+$$(HLIB$(2)_H_$(4))/$$(CFG_MATHLIB): \
+	$$(TLIB$(1)_T_$(4)_H_$(3))/$$(CFG_MATHLIB) \
+	$$(HLIB$(2)_H_$(4))/$$(CFG_CORELIB) \
+	$$(HLIB$(2)_H_$(4))/$$(CFG_RUNTIME)
+	@$$(call E, cp: $$@)
+	$$(Q)cp $$< $$@
+	$$(Q)cp -R $$(TLIB$(1)_T_$(4)_H_$(3))/$(MATHLIB_GLOB) \
+		$$(TLIB$(1)_T_$(4)_H_$(3))/$(MATHLIB_DSYM_GLOB) \
+	        $$(HLIB$(2)_H_$(4))
+
 $$(HLIB$(2)_H_$(4))/$$(CFG_STDLIB): \
 	$$(TLIB$(1)_T_$(4)_H_$(3))/$$(CFG_STDLIB) \
 	$$(HLIB$(2)_H_$(4))/$$(CFG_CORELIB) \
@@ -79,6 +89,13 @@ $$(HLIB$(2)_H_$(4))/$$(CFG_STDLIB): \
 
 $$(HLIB$(2)_H_$(4))/libcore.rlib: \
 	$$(TLIB$(1)_T_$(4)_H_$(3))/libcore.rlib \
+	$$(HLIB$(2)_H_$(4))/$$(CFG_RUNTIME)
+	@$$(call E, cp: $$@)
+	$$(Q)cp $$< $$@
+
+$$(HLIB$(2)_H_$(4))/libmath.rlib: \
+	$$(TLIB$(1)_T_$(4)_H_$(3))/libmath.rlib \
+	$$(HLIB$(2)_H_$(4))/libcore.rlib \
 	$$(HLIB$(2)_H_$(4))/$$(CFG_RUNTIME)
 	@$$(call E, cp: $$@)
 	$$(Q)cp $$< $$@
