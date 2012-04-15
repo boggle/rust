@@ -1,0 +1,124 @@
+#[link(name = "math",
+       vers = "0.1",
+       uuid = "eb95f578-c80d-438f-b10c-1b4bcbb6b13a",
+       url = "https://github.com/mozilla/rust/tree/master/src/libmath")];
+
+#[comment = "The Rust math library"];
+#[license = "MIT"];
+#[crate_type = "lib"];
+
+export f32;
+export f64;
+export float;
+
+#[path="math_impl"]
+mod f32 {
+
+	export t;
+	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
+	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
+	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
+	export to_str_common, to_str_exact, to_str;
+	export consts;
+
+	import impl::*;
+	import cmath::lib::*;
+	import generic::*;
+	import strfun::*;
+
+	mod consts {
+		import impl::consts::*;
+		import cmath::consts::*;
+	}
+
+	#[path="impl_f32.rs"]
+	mod impl;
+
+	#[path="impl_cmath_float.rs"]
+	mod cmath;
+
+	#[path="impl_generic.rs"]
+	mod generic;
+
+	#[path="impl_strfun.rs"]
+	mod strfun;
+}
+
+#[path="math_impl"]
+mod f64 {
+
+	export t;
+	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
+	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
+	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
+	export to_str_common, to_str_exact, to_str;
+	export consts;
+
+	import impl::*;
+	import cmath::lib::*;
+	import generic::*;
+	import strfun::*;
+
+	mod consts {
+		import impl::consts::*;
+		import cmath::consts::*;
+	}
+
+	#[path="impl_f64.rs"]
+	mod impl;
+
+	#[path="impl_cmath_double.rs"]
+	mod cmath;
+
+	#[path="impl_generic.rs"]
+	mod generic;
+
+	#[path="impl_strfun.rs"]
+	mod strfun;
+}
+
+#[path="math_impl"]
+mod float {
+
+	export t;
+	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
+	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
+	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
+	export to_str_common, to_str_exact, to_str;
+	export consts;
+
+	import impl::*;
+	import cmath::lib::*;
+	import generic::*;
+	import strfun::*;
+
+	mod consts {
+		import impl::consts::*;
+		import cmath::consts::*;
+	}
+
+	#[cfg(target_arch="x86_64")]
+	#[path="impl_f64.rs"]
+	mod fXY;
+
+	#[cfg(target_arch="x86")]
+	#[path="impl_f32.rs"]
+	mod fXY;
+
+	#[path="impl_float.rs"]
+	mod impl;
+
+	#[cfg(target_arch="x86")]
+	#[path="impl_cmath_float.rs"]
+	mod cmath;
+
+	#[cfg(target_arch="x86_64")]
+	#[path="impl_cmath_double.rs"]
+	mod cmath;
+
+	#[path="impl_generic.rs"]
+	mod generic;
+
+	#[path="impl_strfun.rs"]
+	mod strfun;
+}
