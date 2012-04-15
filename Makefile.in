@@ -194,7 +194,7 @@ CORELIB_INPUTS := $(wildcard $(addprefix $(S)src/libcore/,        \
 
 MATHLIB_CRATE := $(S)src/libmath/math.rc
 MATHLIB_INPUTS := $(wildcard $(addprefix $(S)src/libmath/,          \
-                                          std.rc *.rs */*.rs))
+                                          math.rc *.rs */*.rs))
 
 ######################################################################
 # Standard library variables
