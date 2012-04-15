@@ -11,35 +11,41 @@ export f32;
 export f64;
 export float;
 
+mod c_bessel;	
+
 #[path="math_impl"]
 mod f32 {
 
 	export t;
 	export NaN, infinity, neg_infinity;
 	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
+	export j0, j1, jn, y0, y1, yn;
 	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
 	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
 	export to_str_common, to_str_exact, to_str, from_str;
+	export extensions;
 	export consts;
+	export j0, j1, jn, y0, y1, yn;
 
 	import impl::*;
 	import cmath::lib::*;
 	import generic::*;
+	import generic::extensions;
 	import strfun::*;
 
-	#[path="impl_consts.rs"]
+	#[path="consts.rs"]
 	mod consts;
 
-	#[path="impl_f32.rs"]
+	#[path="f32.rs"]
 	mod impl;
 
-	#[path="impl_cmath_float.rs"]
+	#[path="c_float.rs"]
 	mod cmath;
 
-	#[path="impl_generic.rs"]
+	#[path="generic.rs"]
 	mod generic;
 
-	#[path="impl_strfun.rs"]
+	#[path="strfun.rs"]
 	mod strfun;
 }
 
@@ -49,29 +55,32 @@ mod f64 {
 	export t;
 	export NaN, infinity, neg_infinity;
 	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
+	export j0, j1, jn, y0, y1, yn;
 	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
 	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
 	export to_str_common, to_str_exact, to_str, from_str;
+	export extensions;
 	export consts;
 
 	import impl::*;
 	import cmath::lib::*;
 	import generic::*;
+	import generic::extensions;	
 	import strfun::*;
 
-	#[path="impl_consts.rs"]
+	#[path="consts.rs"]
 	mod consts;
 
-	#[path="impl_f64.rs"]
+	#[path="f64.rs"]
 	mod impl;
 
-	#[path="impl_cmath_double.rs"]
+	#[path="c_double.rs"]
 	mod cmath;
 
-	#[path="impl_generic.rs"]
+	#[path="generic.rs"]
 	mod generic;
 
-	#[path="impl_strfun.rs"]
+	#[path="strfun.rs"]
 	mod strfun;
 }
 
@@ -81,41 +90,45 @@ mod float {
 	export t;
 	export NaN, infinity, neg_infinity;
 	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
+	export j0, j1, jn, y0, y1, yn;
 	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
 	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
 	export to_str_common, to_str_exact, to_str, from_str;
+	export extensions;
 	export consts;
 
 	import impl::*;
 	import cmath::lib::*;
 	import generic::*;
+	import generic::extensions;	
 	import strfun::*;
 
-	#[path="impl_consts.rs"]
+	#[path="consts.rs"]
 	mod consts;
 
 	#[cfg(target_arch="x86_64")]
-	#[path="impl_f64.rs"]
+	#[path="f64.rs"]
 	mod fXY;
 
 	#[cfg(target_arch="x86")]
-	#[path="impl_f32.rs"]
+	#[path="f32.rs"]
 	mod fXY;
 
-	#[path="impl_float.rs"]
+	#[path="float.rs"]
 	mod impl;
 
 	#[cfg(target_arch="x86")]
-	#[path="impl_cmath_float.rs"]
+	#[path="c_float.rs"]
 	mod cmath;
 
 	#[cfg(target_arch="x86_64")]
-	#[path="impl_cmath_double.rs"]
+	#[path="c_double.rs"]
 	mod cmath;
 
-	#[path="impl_generic.rs"]
+	#[path="generic.rs"]
 	mod generic;
 
-	#[path="impl_strfun.rs"]
+	#[path="strfun.rs"]
 	mod strfun;
 }
+
