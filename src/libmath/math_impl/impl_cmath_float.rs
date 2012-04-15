@@ -72,9 +72,9 @@ native mod lib {
     #[link_name="truncf"] pure fn trunc(n: t) -> t;
 }
 
-// PORT check these by running src/etc/machconsts.c for your architecture
-// FIXME obtain machine float/math constants automatically (Issue #1986)
 mod consts {
+    // PORT check these by running src/etc/machconsts.c for your architecture
+    // FIXME obtain machine float/math constants automatically (Issue #1986)
     const radix: uint = 2u;
     const mantissa_digits: uint = 24u;
     const digits: uint = 6u;

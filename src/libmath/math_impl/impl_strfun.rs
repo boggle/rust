@@ -16,17 +16,17 @@ fn to_str_common(num: t, digits: uint, exact: bool) -> str {
     if is_NaN(num) { ret "NaN"; }
     if num == infinity { ret "inf"; }
     if num == neg_infinity { ret "-inf"; }
-    let mut (num, accum) = if num < impl::consts::zero { (-num, "-") } else { (num, "") };
+    let mut (num, accum) = if num < consts::zero { (-num, "-") } else { (num, "") };
     let trunc = num as uint;
     let mut frac = num - (trunc as t);
     accum += uint::str(trunc);
-    if (frac < impl::consts::epsilon && !exact) || digits == 0u { ret accum; }
+    if (frac < consts::epsilon && !exact) || digits == 0u { ret accum; }
     accum += ".";
     let mut i = digits;
-    let mut epsilon = impl::consts::one / pow_with_uint(10u, i);
-    while i > 0u && (frac >= impl::consts::epsilon || exact) {
-        frac *= impl::consts::ten;
-        epsilon *= impl::consts::ten;
+    let mut epsilon = consts::one / pow_with_uint(10u, i);
+    while i > 0u && (frac >= consts::epsilon || exact) {
+        frac *= consts::ten;
+        epsilon *= consts::ten;
         let digit = frac as uint;
         accum += uint::str(digit);
         frac -= digit as t;
@@ -102,7 +102,7 @@ fn from_str(num: str) -> option<t> {
    let len = str::len(num);        //Length of the string, in bytes.
 
    if len == 0u { ret none; }
-   let mut total = impl::consts::zero;    //Accumulated result
+   let mut total = consts::zero;    //Accumulated result
    let mut c     = 'z';                   //Latest char.
 
    //The string must start with one of the following characters.
@@ -131,7 +131,7 @@ fn from_str(num: str) -> option<t> {
        pos = char_range.next;
        alt c {
          '0' to '9' {
-           total = total * impl::consts::ten;
+           total = total * consts::ten;
            total += ((c as int) - ('0' as int)) as t;
          }
          '.' | 'e' | 'E' {
@@ -144,14 +144,14 @@ fn from_str(num: str) -> option<t> {
    }
 
    if c == '.' {//Examine decimal part
-      let mut decimal = impl::consts::one;
+      let mut decimal = consts::one;
       while(pos < len) {
          let char_range = str::char_range_at(num, pos);
          c = char_range.ch;
          pos = char_range.next;
          alt c {
             '0' | '1' | '2' | '3' | '4' | '5' | '6'| '7' | '8' | '9'  {
-                 decimal /= impl::consts::ten;
+                 decimal /= consts::ten;
                  total += (((c as int) - ('0' as int)) as t)*decimal;
              }
              'e' | 'E' {
@@ -211,7 +211,7 @@ fn from_str(num: str) -> option<t> {
      ret none;
    } else {
      if(neg) {
-        total *= negated(impl::consts::one);
+        total *= negated(consts::one);
      }
      ret some(total);
    }

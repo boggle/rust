@@ -7,13 +7,6 @@ const infinity: t = fXY::infinity as t;
 const neg_infinity: t = fXY::infinity as t;
 
 mod consts {
-	const zero: t = fXY::consts::zero as t;
-	const one: t = fXY::consts::one as t;
-	const two: t = fXY::consts::two as t;
-	const three: t = fXY::consts::three as t;
-	const four: t = fXY::consts::four as t;
-	const ten: t = fXY::consts::ten as t;
-
    const min_value: t = fXY::consts::min_value as t;
    const max_value: t = fXY::consts::max_value as t;
    const epsilon: t = fXY::consts::epsilon as t;

@@ -5,7 +5,7 @@ pure fn is_NaN(f: t) -> bool { f != f }
 pure fn negated(f: t) -> t { ret - f; }
 
 #[inline(always)]
-pure fn inverse(f: t) -> t { ret  impl::consts::one / f; }
+pure fn inverse(f: t) -> t { ret  consts::one / f; }
 
 #[inline(always)]
 pure fn add(x: t, y: t) -> t { ret x + y; }
@@ -45,14 +45,14 @@ Returns true if `x` is a positive number, including +0.0 and +Infinity
 "]
 #[inline(always)]
 pure fn is_positive(x: t) -> bool
-    { ret x > impl::consts::zero || (impl::consts::one/x) == infinity; }
+    { ret x > consts::zero || (consts::one/x) == infinity; }
 
 #[doc = "
 Returns true if `x` is a negative number, including -0.0 and -Infinity
 "]
 #[inline(always)]
 pure fn is_negative(x: t) -> bool
-    { ret x < impl::consts::zero || (impl::consts::one/x) == neg_infinity; }
+    { ret x < consts::zero || (consts::one/x) == neg_infinity; }
 
 #[doc = "
 Returns true if `x` is a negative number, including -0.0 and -Infinity
@@ -61,7 +61,7 @@ This is the same as `is_negative`.
 "]
 #[inline(always)]
 pure fn is_nonpositive(x: t) -> bool {
-  ret x < impl::consts::zero || (impl::consts::one/x) == neg_infinity;
+  ret x < consts::zero || (consts::one/x) == neg_infinity;
 }
 
 #[doc = "
@@ -71,15 +71,15 @@ This is the same as `is_positive`.)
 "]
 #[inline(always)]
 pure fn is_nonnegative(x: t) -> bool {
-  ret x > impl::consts::zero || (impl::consts::one/x) == infinity;
+  ret x > consts::zero || (consts::one/x) == infinity;
 }
 
 #[doc = "
-Returns true if `x` is a impl::consts::zero number (positive or negative 0.0)
+Returns true if `x` is a consts::zero number (positive or negative 0.0)
 "]
 #[inline(always)]
 pure fn is_zero(x: t) -> bool {
-    ret x == impl::consts::zero || x == -impl::consts::zero;
+    ret x == consts::zero || x == -consts::zero;
 }
 
 #[doc = "Returns true if `x`is an infinite number"]
@@ -119,7 +119,7 @@ pure fn logarithm(n: t, b: t) -> t {
 #[cfg(target_os="freebsd")]
 #[inline(always)]
 pure fn log2(n: t) -> t {
-    ret ln(n) / impl::consts::ln_2;
+    ret ln(n) / consts::ln_2;
 }
 
 
@@ -144,10 +144,10 @@ pure fn pow_with_uint(base: uint, pow: uint) -> t {
       if pow == 0u {
         ret NaN;
       }
-       ret impl::consts::zero;
+       ret consts::zero;
    }
    let mut my_pow     = pow;
-   let mut total      = impl::consts::one;
+   let mut total      = consts::one;
    let mut multiplier = base as t;
    unsafe {
        while (my_pow > 0u) {

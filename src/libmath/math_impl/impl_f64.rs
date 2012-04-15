@@ -5,13 +5,6 @@ const infinity: t = 1.0_f64/0.0_f64;
 const neg_infinity: t = -1.0_f64/0.0_f64;
 
 mod consts {
-    const zero: t = 0.0f64;
-    const one: t = 1.0f64;
-    const two: t = 2.0f64;
-    const three: t = 3.0f64;
-    const four: t = 4.0f64;
-    const ten: t = 10.0f64;
-
     // FIXME this is wrong! replace with hexadecimal (%a) constants below
     // (see Issue #1433)
     const min_value: t = 2.225074e-308_f64;

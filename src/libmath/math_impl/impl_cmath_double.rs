@@ -81,9 +81,9 @@ native mod lib {
     pure fn yn(i: c_int, n: t) -> t;
 }
 
-// PORT check these by running src/etc/machconsts.c for your architecture
-// FIXME obtain machine float/math constants automatically (Issue #1986)
 mod consts {
+    // PORT check these by running src/etc/machconsts.c for your architecture
+    // FIXME obtain machine float/math constants automatically (Issue #1986)
     const radix: uint = 2u;
     const mantissa_digits: uint = 53u;
     const digits: uint = 15u;

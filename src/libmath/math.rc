@@ -15,10 +15,11 @@ export float;
 mod f32 {
 
 	export t;
+	export NaN, infinity, neg_infinity;
 	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
 	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
 	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
-	export to_str_common, to_str_exact, to_str;
+	export to_str_common, to_str_exact, to_str, from_str;
 	export consts;
 
 	import impl::*;
@@ -26,10 +27,8 @@ mod f32 {
 	import generic::*;
 	import strfun::*;
 
-	mod consts {
-		import impl::consts::*;
-		import cmath::consts::*;
-	}
+	#[path="impl_consts.rs"]
+	mod consts;
 
 	#[path="impl_f32.rs"]
 	mod impl;
@@ -48,10 +47,11 @@ mod f32 {
 mod f64 {
 
 	export t;
+	export NaN, infinity, neg_infinity;
 	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
 	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
 	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
-	export to_str_common, to_str_exact, to_str;
+	export to_str_common, to_str_exact, to_str, from_str;
 	export consts;
 
 	import impl::*;
@@ -59,10 +59,8 @@ mod f64 {
 	import generic::*;
 	import strfun::*;
 
-	mod consts {
-		import impl::consts::*;
-		import cmath::consts::*;
-	}
+	#[path="impl_consts.rs"]
+	mod consts;
 
 	#[path="impl_f64.rs"]
 	mod impl;
@@ -81,10 +79,11 @@ mod f64 {
 mod float {
 
 	export t;
+	export NaN, infinity, neg_infinity;
 	export acos, asin, atan, atan2, cbrt, ceil, copysign, cos, cosh, floor, erf, erfc, exp, expm1, exp2, abs, abs_sub, mul_add, fmax, fmin, nextafter, frexp, hypot, ldexp, lgamma, ln, log_radix, ln1p, log10, log2, ilog_radix, modf, pow, round, sin, sinh, sqrt, tan, tanh, tgamma, trunc;
 	export is_NaN, negated, inverse, add, sub, mul, div, rem, lt, le, eq, ne, ge, gt;
 	export is_positive, is_negative, is_nonpositive, is_nonnegative, is_zero, is_infinite, signbit, logarithm, pow_with_uint;
-	export to_str_common, to_str_exact, to_str;
+	export to_str_common, to_str_exact, to_str, from_str;
 	export consts;
 
 	import impl::*;
@@ -92,10 +91,8 @@ mod float {
 	import generic::*;
 	import strfun::*;
 
-	mod consts {
-		import impl::consts::*;
-		import cmath::consts::*;
-	}
+	#[path="impl_consts.rs"]
+	mod consts;
 
 	#[cfg(target_arch="x86_64")]
 	#[path="impl_f64.rs"]
